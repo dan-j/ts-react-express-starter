@@ -11,13 +11,13 @@ const path = require('path');
 const config: Webpack.Configuration = {
     entry: [
         'react-hot-loader/patch',
-        './src/index.tsx',
+        './client/index.tsx',
     ],
 
     output: {
         filename: 'bundle.js',
         publicPath: '/',
-        path: path.resolve('dist'),
+        path: path.resolve(__dirname, 'dist/client'),
     },
 
     resolve: {
@@ -28,15 +28,24 @@ const config: Webpack.Configuration = {
 
     module: {
         rules: [{
-            test: /.tsx?$/,
-            include: path.resolve('src'),
+            test: /\.tsx?$/,
+            include: path.resolve('client'),
             exclude: /node_modules/,
-            use: [
-                'babel-loader',
-                'awesome-typescript-loader',
-            ],
+            use: [{
+                loader: 'babel-loader',
+                options: {
+                    /* we want to disable es2015 modules ONLY in front-end code for HMR
+                     * so we have to disable .babelrc and configure babel for webpack here.
+                     */
+                    babelrc: false,
+                    presets: [['es2015', { modules: false }], 'react'],
+                    plugins: ['react-hot-loader/babel'],
+                },
+            }, {
+                loader: 'awesome-typescript-loader',
+            }],
         }, {
-            test: /\.scss$/,
+            test: /\.s?css$/,
             exclude: /node_modules/,
             use: [{
                 loader: 'style-loader',
@@ -47,6 +56,7 @@ const config: Webpack.Configuration = {
                 loader: 'css-loader',
                 options: {
                     modules: true,
+                    sourceMap: true,
                     importLoaders: 1,
                     localIdentName: '[name]__[local]___[hash:base64:5]',
                 },
@@ -63,7 +73,7 @@ const config: Webpack.Configuration = {
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new CopyWebpackPlugin([{
-            from: 'src/index.html',
+            from: 'client/index.html',
         }]),
     ],
 
@@ -71,7 +81,7 @@ const config: Webpack.Configuration = {
         port: 8080,
         historyApiFallback: true,
         hotOnly: true,
-        contentBase: path.resolve(__dirname, 'dist/'),
+        contentBase: path.resolve(__dirname, 'dist/client'),
     },
 };
 

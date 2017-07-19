@@ -8,8 +8,7 @@
         "strict": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
-        "baseUrl": "src",
-        "allowJs": true,
+        "baseUrl": "client",
         "allowSyntheticDefaultImports": true
     },
     "exclude": [

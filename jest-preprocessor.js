@@ -46,7 +46,7 @@ module.exports = {
             babelSourceMap = map;
         }
 
-        // babel's sourceMap merge functionality is flakey, this works much better and gives us
+        // babel's sourceMap merge functionality is flaky, this works much better and gives us
         // awesome code coverage mapping
         const mergedSourceMap = sourceMapMerge(tsSourceMap, babelSourceMap);
         // `file` doesn't match in the merge, we want the "most-compiled" file (i.e. from babel)

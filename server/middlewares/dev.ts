@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import chokidar from 'chokidar';
-import chalk from 'chalk';
+import * as webpack from 'webpack';
+import * as webpackDevMiddleware from 'webpack-dev-middleware';
+import * as webpackHotMiddleware from 'webpack-hot-middleware';
+import * as chokidar from 'chokidar';
 import { Request, Response, RequestHandler, NextFunction } from 'express';
-import path from 'path';
+import * as path from 'path';
+import * as clear from 'clear-require';
 
-import webpackConfig from '../../webpack.config';
+import * as webpackConfig from '../../webpack.config';
 
 function setupMiddleware() {
     const compiler = webpack(webpackConfig);
@@ -18,19 +18,12 @@ function setupMiddleware() {
     // Do "hot-reloading" of express stuff on the server
     // Throw away cached modules and re-require next time
     // Ensure there's no important state in there!
-    const watcher = chokidar.watch('./server');
+    const watchPath = path.resolve('server');
+    const watcher = chokidar.watch(watchPath);
 
     watcher.on('ready', () => {
-        watcher.on('all', () => {
-            const baseRegex = path.resolve(__dirname, '../');
-            chalk.bgCyan(`File changed, checking require cache for regex: ${baseRegex}`);
-            const regex = new RegExp(baseRegex);
-
-            Object.keys(require.cache).forEach((id) => {
-                if (regex.test(id)) {
-                    delete require.cache[id];
-                }
-            });
+        watcher.on('all', (event, filepath) => {
+            clear(filepath);
         });
     });
 

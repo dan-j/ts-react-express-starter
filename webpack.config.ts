@@ -10,6 +10,7 @@ const path = require('path');
 
 const config: Webpack.Configuration = {
     entry: [
+        'webpack-hot-middleware/client',
         'react-hot-loader/patch',
         './client/index.tsx',
     ],

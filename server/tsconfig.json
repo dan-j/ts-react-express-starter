@@ -8,7 +8,9 @@
          * that doesn't make sense, set outDir to '../build/server' and take a look at the build
          * directory
          **/
-        "outDir": "../build/"
+        "outDir": "../build/",
+        "module": "commonjs",
+        "allowSyntheticDefaultImports": false
     },
     "include": ["./**/*"]
 }

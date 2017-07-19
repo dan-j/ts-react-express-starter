@@ -2,6 +2,7 @@
 /.idea
 /dist
 /ts-build
+/build
 /coverage
 
 *.log

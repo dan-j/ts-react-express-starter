@@ -1,11 +1,14 @@
 {
+    "extends": "../tsconfig.json",
     "compilerOptions": {
-        "target": "es2015",
-        "module": "es2015",
-        "outDir": "../build/server-ts",
-        "strict": true,
-        "strictNullChecks": true,
-        "noImplicitThis": true,
-        "allowSyntheticDefaultImports": true
-    }
+        /**
+         * Because the express app imports 'webpack.config.ts', it gets included in the list of
+         * files to compile. This means that the root of the compiled files is the repo-root, not
+         * './server/'. This means outDir needs to be '../build/' instead of '../build/server'. If
+         * that doesn't make sense, set outDir to '../build/server' and take a look at the build
+         * directory
+         **/
+        "outDir": "../build/"
+    },
+    "include": ["./**/*"]
 }

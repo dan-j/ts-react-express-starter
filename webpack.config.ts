@@ -43,6 +43,9 @@ const config: Webpack.Configuration = {
                 },
             }, {
                 loader: 'awesome-typescript-loader',
+                options: {
+                    configFileName: 'client/tsconfig.json',
+                },
             }],
         }, {
             test: /\.s?css$/,

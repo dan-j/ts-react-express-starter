@@ -4,14 +4,13 @@
         "module": "es2015",
         "jsx": "preserve",
         "sourceMap": true,
-        "outDir": "ts-build",
+        "outDir": "build",
         "strict": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
-        "baseUrl": "client",
         "allowSyntheticDefaultImports": true
     },
-    "exclude": [
-        "node_modules"
-    ]
+    "files": ["index.ts"],
+    "include": ["server", "client"],
+    "exclude": ["node_modules"]
 }

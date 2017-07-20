@@ -2,18 +2,45 @@
 // modules and `ts-node` doesn't support ES6 (hence the use of webpack). However, because the
 // only place where `Webpack` is referenced is inside type declarations, the import statement is
 // removed at transpilation-time so no error occurs.
-import * as Webpack from 'webpack';
+import { Configuration, Plugin } from 'webpack';
 
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
-const config: Webpack.Configuration = {
-    entry: [
+const entry = ['./client/index.tsx'];
+
+const plugins: Plugin[] = [
+    new CopyWebpackPlugin([{
+        from: 'client/index.html',
+    }]),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
+];
+
+const babelPlugins: string[] = [];
+
+if (process.env.NODE_ENV === 'development') {
+
+    const devEntries = [
         'webpack-hot-middleware/client',
         'react-hot-loader/patch',
-        './client/index.tsx',
-    ],
+    ];
+
+    entry.unshift(...devEntries);
+
+    const devPlugins: Plugin[] = [
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+    ];
+
+    plugins.unshift(...devPlugins);
+
+    babelPlugins.push('react-hot-loader/babel');
+}
+
+const config: Configuration = {
+    entry,
+    plugins,
 
     output: {
         filename: 'bundle.js',
@@ -40,7 +67,7 @@ const config: Webpack.Configuration = {
                      */
                     babelrc: false,
                     presets: [['es2015', { modules: false }], 'react'],
-                    plugins: ['react-hot-loader/babel'],
+                    plugins: babelPlugins,
                 },
             }, {
                 loader: 'awesome-typescript-loader',
@@ -72,14 +99,6 @@ const config: Webpack.Configuration = {
             }],
         }],
     },
-
-    plugins: [
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new CopyWebpackPlugin([{
-            from: 'client/index.html',
-        }]),
-    ],
 
     devServer: {
         port: 8080,

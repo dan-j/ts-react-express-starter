@@ -9,7 +9,11 @@
         "noImplicitAny": true,
         "strictNullChecks": true,
         "allowSyntheticDefaultImports": true,
-        "typeRoots": ["custom-typings", "node_modules/@types"]
+        "moduleResolution": "node",
+        "baseUrl": ".",
+        "paths": {
+            "*": ["custom-types/*"]
+        }
     },
     "files": ["index.ts"],
     "include": ["server", "client"],

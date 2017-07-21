@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as webpack from 'webpack';
-import * as webpackDevMiddleware from 'webpack-dev-middleware';
-import * as webpackHotMiddleware from 'webpack-hot-middleware';
-import * as chokidar from 'chokidar';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import chokidar from 'chokidar';
 import { Request, Response, RequestHandler, NextFunction } from 'express';
-import * as path from 'path';
-import * as clear from 'clear-require';
+import path from 'path';
+import clear from 'clear-require';
 
-import * as webpackConfig from '../../webpack.config';
+import webpackConfig from '../../webpack.config';
 
 function setupMiddleware() {
     const compiler = webpack(webpackConfig);

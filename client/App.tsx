@@ -6,11 +6,13 @@ interface AppProps extends CSSModules.InjectedCSSModuleProps {
     name?: String;
 }
 
-const App: React.StatelessComponent<AppProps> = ({ name }) => (
-    <div>
-        <p styleName="greeting">Hello, {name}</p>
-    </div>
-);
+const App: React.StatelessComponent<AppProps> = ({ name }) => {
+    return (
+        <div>
+            <p styleName="greeting">Hello, {name}</p>
+        </div>
+    );
+};
 
 App.defaultProps = {
     name: 'World',

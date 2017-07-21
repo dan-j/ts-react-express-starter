@@ -13,7 +13,7 @@
     "scripts": {
         "clean": "rimraf build dist",
         "test": "jest",
-        "dev": "cross-env NODE_ENV=development ts-node $NODE_DEBUG_OPTION -P server index.ts",
+        "dev": "cross-env NODE_ENV=development node -r ts-babel-node/register $NODE_DEBUG_OPTION index.ts",
         "build:client": "cross-env NODE_ENV=production webpack -p --config webpack.config.ts",
         "build:server": "cross-env NODE_ENV=production tsc -p server && babel -d dist build",
         "build": "concurrently 'npm run build:server' 'npm run build:client'",
@@ -24,6 +24,7 @@
     "dependencies": {
         "@types/chalk": "^0.4.31",
         "@types/chokidar": "^1.7.0",
+        "@types/clear-require": "^2.0.0",
         "@types/express": "^4.0.36",
         "@types/react": "^15.0.38",
         "@types/react-css-modules": "^4.2.1",
@@ -46,10 +47,11 @@
     "devDependencies": {
         "@types/chai": "^4.0.1",
         "@types/copy-webpack-plugin": "^4.0.0",
-        "@types/enzyme": "^2.8.2",
+        "@types/enzyme": "^2.8.3",
         "@types/enzyme-to-json": "^1.5.0",
-        "@types/jest": "^20.0.2",
-        "@types/react-test-renderer": "^15.5.1",
+        "@types/jest": "^20.0.4",
+        "@types/react-test-renderer": "^15.5.2",
+        "@types/supertest": "^2.0.2",
         "@types/webpack": "^3.0.4",
         "awesome-typescript-loader": "^3.2.1",
         "babel-cli": "^6.24.1",
@@ -74,8 +76,10 @@
         "rimraf": "^2.6.1",
         "sass-loader": "^6.0.6",
         "style-loader": "^0.18.2",
-        "ts-babel-node": "1.1.0",
-        "ts-node": "^3.2.0",
+        "supertest": "^3.0.0",
+        "ts-babel-node": "https://github.com/danielmoore/ts-babel-node.git",
+        "ts-jest": "^20.0.7",
+        "ts-node": "https://github.com/TypeStrong/ts-node.git#v3.0.6",
         "tslint": "^5.5.0",
         "tslint-config-airbnb": "^5.2.1",
         "tslint-react": "^3.0.0",
@@ -96,7 +100,7 @@
             "server"
         ],
         "transform": {
-            "^.+\\.[jt]sx?$": "./jest-preprocessor.js"
+            "^.+\\.[jt]sx?$": "./node_modules/ts-jest/preprocessor.js"
         },
         "testMatch": [
             "**/__tests__/**/*.test.(ts|tsx|js)"
@@ -104,6 +108,11 @@
         "mapCoverage": true,
         "collectCoverageFrom": [
             "(client|server)/**/*.{js,jsx,ts,tsx}"
-        ]
+        ],
+        "globals": {
+            "ts-jest": {
+                "useBabelrc": true
+            }
+        }
     }
 }

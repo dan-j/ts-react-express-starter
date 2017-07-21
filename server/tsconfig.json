@@ -1,16 +1,7 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
-        /**
-         * Because the express app imports 'webpack.config.ts', it gets included in the list of
-         * files to compile. This means that the root of the compiled files is the repo-root, not
-         * './server/'. This means outDir needs to be '../build/' instead of '../build/server'. If
-         * that doesn't make sense, set outDir to '../build/server' and take a look at the build
-         * directory
-         **/
-        "outDir": "../build/",
-        "module": "commonjs",
-        "allowSyntheticDefaultImports": false
+        "outDir": "../build/"
     },
     "include": ["./**/*"]
 }

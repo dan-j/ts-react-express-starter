@@ -1,15 +1,23 @@
-# typescript-react-starter
+# ts-react-express-starter
 
-Simple Typescript/React starter with Webpack 2 and hot module reloading.
+Typescript starter kit with minimal React frontend and express backend. Complete with example UI and
+ server unit tests using Jest and hot reloading UI and express routes when in development mode.
 
-To build the project run
+## Quickstart
 
     npm run build
-
-This will output `index.html` and `bundle.js` to `./dist`, which can be served however you deem appropriately.
-
-The project is also set up with `webpack-dev-server`, which can run a server for development. Simply run
-
     npm start
+    
+## Development build (with HMR and express route reloading)
+
+    npm run dev
+    
+## Tests
+
+    npm run test
+
+_or simply,_
+
+    jest
 
 Enjoy.

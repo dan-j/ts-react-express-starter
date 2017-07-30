@@ -14,5 +14,6 @@ describe('<App />', () => {
         const wrapper = shallow(<App name="Dan" />);
         expect(toJson(wrapper)).toMatchSnapshot();
     });
+
 });
 

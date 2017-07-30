@@ -47,12 +47,12 @@
     "devDependencies": {
         "@types/chai": "^4.0.1",
         "@types/copy-webpack-plugin": "^4.0.0",
-        "@types/enzyme": "^2.8.3",
+        "@types/enzyme": "^2.8.4",
         "@types/enzyme-to-json": "^1.5.0",
         "@types/jest": "^20.0.4",
         "@types/react-test-renderer": "^15.5.2",
         "@types/supertest": "^2.0.2",
-        "@types/webpack": "^3.0.4",
+        "@types/webpack": "^3.0.5",
         "awesome-typescript-loader": "^3.2.1",
         "babel-cli": "^6.24.1",
         "babel-core": "^6.25.0",
@@ -77,14 +77,14 @@
         "sass-loader": "^6.0.6",
         "style-loader": "^0.18.2",
         "supertest": "^3.0.0",
-        "ts-babel-node": "https://github.com/danielmoore/ts-babel-node.git",
+        "ts-babel-node": "https://github.com/dan-j/ts-babel-node.git",
         "ts-jest": "^20.0.7",
-        "ts-node": "https://github.com/TypeStrong/ts-node.git#v3.0.6",
+        "ts-node": "^3.3.0",
         "tslint": "^5.5.0",
         "tslint-config-airbnb": "^5.2.1",
         "tslint-react": "^3.0.0",
         "webpack": "^3.2.0",
-        "webpack-dev-server": "^2.5.1"
+        "webpack-dev-server": "^2.6.1"
     },
     "jest": {
         "moduleNameMapper": {
@@ -100,7 +100,7 @@
             "server"
         ],
         "transform": {
-            "^.+\\.[jt]sx?$": "./node_modules/ts-jest/preprocessor.js"
+            "^.+\\.[jt]sx?$": "./jest-preprocessor.js"
         },
         "testMatch": [
             "**/__tests__/**/*.test.(ts|tsx|js)"
@@ -108,11 +108,6 @@
         "mapCoverage": true,
         "collectCoverageFrom": [
             "(client|server)/**/*.{js,jsx,ts,tsx}"
-        ],
-        "globals": {
-            "ts-jest": {
-                "useBabelrc": true
-            }
-        }
+        ]
     }
 }

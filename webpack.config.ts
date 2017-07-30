@@ -58,7 +58,7 @@ const config: Configuration = {
         rules: [{
             test: /\.tsx?$/,
             include: path.resolve('client'),
-            exclude: /node_modules/,
+            exclude: [/node_modules/, path.resolve('server')],
             use: [{
                 loader: 'babel-loader',
                 options: {
@@ -89,7 +89,7 @@ const config: Configuration = {
                     modules: true,
                     sourceMap: true,
                     importLoaders: 1,
-                    localIdentName: '[name]__[local]___[hash:base64:5]',
+                    localIdentName: '[name]__[local]',
                 },
             }, {
                 loader: 'sass-loader',

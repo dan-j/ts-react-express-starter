@@ -11,7 +11,6 @@ if (process.env.NODE_ENV === 'development') {
     app.use(devMiddleware());
 
 } else {
-
     app.use(express.static(path.resolve('dist/client/')));
 
 }

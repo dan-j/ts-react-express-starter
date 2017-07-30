@@ -18,8 +18,10 @@ function setupMiddleware() {
     // Do "hot-reloading" of express stuff on the server
     // Throw away cached modules and re-require next time
     // Ensure there's no important state in there!
-    const watchPath = path.resolve('server');
-    const watcher = chokidar.watch(watchPath);
+    const watchPath = path.resolve('server/routes');
+    const watcher = chokidar.watch(watchPath, {
+        ignored: path.resolve(watchPath, 'app.ts'),
+    });
 
     watcher.on('ready', () => {
         watcher.on('all', (event, filepath) => {
